@@ -383,10 +383,10 @@ function App() {
   return (
     <div className="App">
       {/* Family member images in corners */}
-      <img src="/family1.jpg" alt="Family member 1" style={{ position: 'fixed', top: 18, left: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
-      <img src="/family2.jpg" alt="Family member 2" style={{ position: 'fixed', top: 18, right: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
-      <img src="/family3.jpg" alt="Family member 3" style={{ position: 'fixed', bottom: 18, left: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
-      <img src="/family4.jpg" alt="Family member 4" style={{ position: 'fixed', bottom: 18, right: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
+      <img src={`${process.env.PUBLIC_URL}/family1.jpg`} alt="Family member 1" style={{ position: 'fixed', top: 18, left: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
+      <img src={`${process.env.PUBLIC_URL}/family2.jpg`} alt="Family member 2" style={{ position: 'fixed', top: 18, right: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
+      <img src={`${process.env.PUBLIC_URL}/family3.jpg`} alt="Family member 3" style={{ position: 'fixed', bottom: 18, left: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
+      <img src={`${process.env.PUBLIC_URL}/family4.jpg`} alt="Family member 4" style={{ position: 'fixed', bottom: 18, right: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
       <header className="App-header">
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 32, maxWidth: '1400px', margin: '0 auto' }}>
           <div style={{ flex: '0 0 300px', background: '#f8fafc', borderRadius: 16, padding: 20, boxShadow: '0 4px 16px rgba(0,0,0,0.1)', height: '280px', display: 'flex', flexDirection: 'column' }}>
@@ -415,7 +415,7 @@ function App() {
           </div>
           <div style={{ flex: 1, textAlign: 'center' }}>
             <img
-              src="/princess_cruise.jpg"
+              src={`${process.env.PUBLIC_URL}/princess_cruise.jpg`}
               alt="Princess Cruises ship in cold weather"
               style={{
                 maxWidth: '100%',
