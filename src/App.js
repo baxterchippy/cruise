@@ -264,6 +264,8 @@ function App() {
   const [editModal, setEditModal] = useState({ open: false, place: null });
   const [loginModal, setLoginModal] = useState({ open: false, action: null });
   const [currentUser, setCurrentUser] = useState(null);
+  const [foodPlacesExpanded, setFoodPlacesExpanded] = useState(false);
+  const [sightseeingExpanded, setSightseeingExpanded] = useState(false);
   const [foodPlaces, setFoodPlaces] = useState([]);
   const [sightseeingPlaces, setSightseeingPlaces] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -383,84 +385,103 @@ function App() {
   return (
     <div className="App">
       {/* Family member images in corners */}
-      <img src={`${process.env.PUBLIC_URL}/family1.jpg`} alt="Family member 1" style={{ position: 'fixed', top: 18, left: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
-      <img src={`${process.env.PUBLIC_URL}/family2.jpg`} alt="Family member 2" style={{ position: 'fixed', top: 18, right: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
-      <img src={`${process.env.PUBLIC_URL}/family3.jpg`} alt="Family member 3" style={{ position: 'fixed', bottom: 18, left: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
-      <img src={`${process.env.PUBLIC_URL}/family4.jpg`} alt="Family member 4" style={{ position: 'fixed', bottom: 18, right: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
+      <img src={`${process.env.PUBLIC_URL}/family1.jpg`} alt="Family member 1" className="family-corner" style={{ position: 'fixed', top: 18, left: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
+      <img src={`${process.env.PUBLIC_URL}/family2.jpg`} alt="Family member 2" className="family-corner" style={{ position: 'fixed', top: 18, right: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
+      <img src={`${process.env.PUBLIC_URL}/family3.jpg`} alt="Family member 3" className="family-corner" style={{ position: 'fixed', bottom: 18, left: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
+      <img src={`${process.env.PUBLIC_URL}/family4.jpg`} alt="Family member 4" className="family-corner" style={{ position: 'fixed', bottom: 18, right: 18, width: 90, height: 90, borderRadius: '50%', border: '4px solid #fff', boxShadow: '0 2px 12px rgba(0,0,0,0.18)', objectFit: 'cover', zIndex: 2000 }} />
       <header className="App-header">
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 32, maxWidth: '1400px', margin: '0 auto' }}>
-          <div style={{ flex: '0 0 300px', background: '#f8fafc', borderRadius: 16, padding: 20, boxShadow: '0 4px 16px rgba(0,0,0,0.1)', height: '280px', display: 'flex', flexDirection: 'column' }}>
-            <h3 style={{ margin: '0 0 12px 0', color: '#1e293b', fontSize: 16, fontWeight: 700 }}>Food Places</h3>
-            <div style={{ flex: 1, overflowY: 'auto', paddingRight: 4, border: '1px solid #e2e8f0', borderRadius: 8, padding: 8, background: '#fff', maxHeight: '200px' }}>
-              {loading ? (
-                <p style={{ color: '#64748b', fontSize: 12, fontStyle: 'italic', margin: 0 }}>Loading food places...</p>
-              ) : foodPlaces.length > 0 ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                  {foodPlaces.map(place => (
-                    <div key={place.id} style={{ background: '#f8fafc', padding: 8, borderRadius: 6, border: '1px solid #e2e8f0', position: 'relative' }}>
-                      <div style={{ fontWeight: 600, color: '#1e293b', marginBottom: 2, fontSize: 13 }}>{place.value}</div>
-                      <div style={{ fontSize: 11, color: '#64748b' }}>{place.stop}</div>
-                      <button 
-                        onClick={() => handleEditPlace(place)}
-                        style={{ position: 'absolute', top: 4, right: 4, background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', fontSize: 12, padding: 2 }}
-                        title="Edit"
-                      >✏️</button>
+        <div className="center-content">
+          <img
+            src={`${process.env.PUBLIC_URL}/princess_cruise.jpg`}
+            alt="Princess Cruises ship in cold weather"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              borderRadius: '16px',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.4)',
+              marginBottom: '1.5em',
+              border: '4px solid #61dafb',
+            }}
+          />
+          <div className="button-container" style={{ marginBottom: 16, display: 'flex', gap: 16, justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
+            <button onClick={() => handleAddClick('eat')} style={{ background: '#61dafb', color: '#222', border: 'none', padding: '10px 20px', borderRadius: 8, fontWeight: 600, fontSize: 16 }}>Add Place to Eat</button>
+            <button onClick={() => handleAddClick('visit')} style={{ background: '#61dafb', color: '#222', border: 'none', padding: '10px 20px', borderRadius: 8, fontWeight: 600, fontSize: 16 }}>Add Place to Sightsee</button>
+            {currentUser && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginLeft: 16 }}>
+                <span style={{ fontSize: 14, color: '#64748b' }}>Logged in as: <strong>{currentUser}</strong></span>
+                <button onClick={handleLogout} style={{ background: '#dc2626', color: '#fff', border: 'none', padding: '6px 12px', borderRadius: 6, fontWeight: 600, fontSize: 12 }}>Logout</button>
+              </div>
+            )}
+          </div>
+          <h1 style={{ margin: '0 0 10px 0', fontSize: 40 }}>New England Cruise</h1>
+          <p style={{ margin: '0 0 6px 0', fontSize: 20 }}><b>Dates:</b> August 2 – August 9</p>
+          <p style={{ margin: '0 0 20px 0', fontSize: 18 }}><b>Stops:</b> {STOPS.join(', ')}</p>
+          
+          {/* Accordion Section */}
+          <div className="accordion-container">
+            <div className="accordion-item">
+              <h3 
+                onClick={() => setFoodPlacesExpanded(!foodPlacesExpanded)}
+                className="accordion-header"
+              >
+                Food Places ({foodPlaces.length})
+                <span style={{ fontSize: 14 }}>{foodPlacesExpanded ? '▲' : '▼'}</span>
+              </h3>
+              {foodPlacesExpanded && (
+                <div className="accordion-content">
+                  {loading ? (
+                    <p style={{ color: '#64748b', fontSize: 14, fontStyle: 'italic', margin: 0 }}>Loading food places...</p>
+                  ) : foodPlaces.length > 0 ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      {foodPlaces.map(place => (
+                        <div key={place.id} className="place-item">
+                          <div style={{ fontWeight: 600, color: '#1e293b', marginBottom: 4, fontSize: 15 }}>{place.value}</div>
+                          <div style={{ fontSize: 13, color: '#64748b' }}>{place.stop}</div>
+                          <button 
+                            onClick={() => handleEditPlace(place)}
+                            className="edit-button"
+                            title="Edit"
+                          >✏️</button>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  ) : (
+                    <p style={{ color: '#64748b', fontSize: 14, fontStyle: 'italic', margin: 0 }}>No food places added yet</p>
+                  )}
                 </div>
-              ) : (
-                <p style={{ color: '#64748b', fontSize: 12, fontStyle: 'italic', margin: 0 }}>No food places added yet</p>
               )}
             </div>
-          </div>
-          <div style={{ flex: 1, textAlign: 'center' }}>
-            <img
-              src={`${process.env.PUBLIC_URL}/princess_cruise.jpg`}
-              alt="Princess Cruises ship in cold weather"
-              style={{
-                maxWidth: '100%',
-                height: 'auto',
-                borderRadius: '16px',
-                boxShadow: '0 4px 24px rgba(0,0,0,0.4)',
-                marginBottom: '1.5em',
-                border: '4px solid #61dafb',
-              }}
-            />
-            <div style={{ marginBottom: 16, display: 'flex', gap: 16, justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
-              <button onClick={() => handleAddClick('eat')} style={{ background: '#61dafb', color: '#222', border: 'none', padding: '10px 20px', borderRadius: 8, fontWeight: 600, fontSize: 16 }}>Add Place to Eat</button>
-              <button onClick={() => handleAddClick('visit')} style={{ background: '#61dafb', color: '#222', border: 'none', padding: '10px 20px', borderRadius: 8, fontWeight: 600, fontSize: 16 }}>Add Place to Sightsee</button>
-              {currentUser && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginLeft: 16 }}>
-                  <span style={{ fontSize: 14, color: '#64748b' }}>Logged in as: <strong>{currentUser}</strong></span>
-                  <button onClick={handleLogout} style={{ background: '#dc2626', color: '#fff', border: 'none', padding: '6px 12px', borderRadius: 6, fontWeight: 600, fontSize: 12 }}>Logout</button>
-                </div>
-              )}
-            </div>
-            <h1 style={{ margin: '0 0 10px 0', fontSize: 40 }}>New England Cruise</h1>
-            <p style={{ margin: '0 0 6px 0', fontSize: 20 }}><b>Dates:</b> August 2 – August 9</p>
-            <p style={{ margin: 0, fontSize: 18 }}><b>Stops:</b> {STOPS.join(', ')}</p>
-          </div>
-          <div style={{ flex: '0 0 300px', background: '#f8fafc', borderRadius: 16, padding: 20, boxShadow: '0 4px 16px rgba(0,0,0,0.1)', height: '280px', display: 'flex', flexDirection: 'column' }}>
-            <h3 style={{ margin: '0 0 12px 0', color: '#1e293b', fontSize: 16, fontWeight: 700 }}>Places to See</h3>
-            <div style={{ flex: 1, overflowY: 'auto', paddingRight: 4, border: '1px solid #e2e8f0', borderRadius: 8, padding: 8, background: '#fff', maxHeight: '200px' }}>
-              {sightseeingLoading ? (
-                <p style={{ color: '#64748b', fontSize: 12, fontStyle: 'italic', margin: 0 }}>Loading places to see...</p>
-              ) : sightseeingPlaces.length > 0 ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                  {sightseeingPlaces.map(place => (
-                    <div key={place.id} style={{ background: '#f8fafc', padding: 8, borderRadius: 6, border: '1px solid #e2e8f0', position: 'relative' }}>
-                      <div style={{ fontWeight: 600, color: '#1e293b', marginBottom: 2, fontSize: 13 }}>{place.value}</div>
-                      <div style={{ fontSize: 11, color: '#64748b' }}>{place.stop}</div>
-                      <button 
-                        onClick={() => handleEditPlace(place)}
-                        style={{ position: 'absolute', top: 4, right: 4, background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', fontSize: 12, padding: 2 }}
-                        title="Edit"
-                      >✏️</button>
+            
+            <div className="accordion-item">
+              <h3 
+                onClick={() => setSightseeingExpanded(!sightseeingExpanded)}
+                className="accordion-header"
+              >
+                Places to See ({sightseeingPlaces.length})
+                <span style={{ fontSize: 14 }}>{sightseeingExpanded ? '▲' : '▼'}</span>
+              </h3>
+              {sightseeingExpanded && (
+                <div className="accordion-content">
+                  {sightseeingLoading ? (
+                    <p style={{ color: '#64748b', fontSize: 14, fontStyle: 'italic', margin: 0 }}>Loading places to see...</p>
+                  ) : sightseeingPlaces.length > 0 ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      {sightseeingPlaces.map(place => (
+                        <div key={place.id} className="place-item">
+                          <div style={{ fontWeight: 600, color: '#1e293b', marginBottom: 4, fontSize: 15 }}>{place.value}</div>
+                          <div style={{ fontSize: 13, color: '#64748b' }}>{place.stop}</div>
+                          <button 
+                            onClick={() => handleEditPlace(place)}
+                            className="edit-button"
+                            title="Edit"
+                          >✏️</button>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  ) : (
+                    <p style={{ color: '#64748b', fontSize: 14, fontStyle: 'italic', margin: 0 }}>No places to see added yet</p>
+                  )}
                 </div>
-              ) : (
-                <p style={{ color: '#64748b', fontSize: 12, fontStyle: 'italic', margin: 0 }}>No places to see added yet</p>
               )}
             </div>
           </div>

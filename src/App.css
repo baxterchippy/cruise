@@ -36,3 +36,131 @@
     transform: rotate(360deg);
   }
 }
+
+/* Responsive Layout */
+.center-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* Accordion Styles */
+.accordion-container {
+  margin-top: 20px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.accordion-item {
+  background: #f8fafc;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.accordion-header {
+  background: #e2e8f0;
+  margin: 0;
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 18px;
+  color: #1e293b;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+.accordion-header:hover {
+  background: #cbd5e1;
+}
+
+.accordion-content {
+  padding: 16px 20px;
+  background: #fff;
+  border-top: 1px solid #e2e8f0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.place-item {
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.place-item:last-child {
+  margin-bottom: 0;
+}
+
+.edit-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.edit-button:hover {
+  background: #e2e8f0;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .center-content {
+    padding: 0 15px;
+  }
+  
+  .accordion-container {
+    max-width: 100%;
+    margin-top: 15px;
+  }
+  
+  .accordion-header {
+    font-size: 16px;
+    padding: 14px 16px;
+  }
+  
+  .accordion-content {
+    padding: 12px 16px;
+    max-height: 250px;
+  }
+  
+  .place-item {
+    padding: 10px;
+    margin-bottom: 6px;
+  }
+  
+  .App-header h1 {
+    font-size: 28px !important;
+  }
+  
+  .App-header p {
+    font-size: 16px !important;
+  }
+  
+  /* Hide corner family images on mobile */
+  .family-corner {
+    display: none;
+  }
+  
+  /* Make buttons stack on mobile */
+  .button-container {
+    flex-direction: column;
+    gap: 12px !important;
+  }
+}
